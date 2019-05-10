@@ -9,7 +9,7 @@
 	$db = mysqli_connect($_SESSION['endpoint'], $_SESSION['master'], $_SESSION['password'], $_SESSION['database']);
 	if (mysqli_connect_errno()) header('location: login.php');
 
-	msqli_query($db, "CREATE TABLE `Lab` ( `ID` int(11) NOT NULL AUTO_INCREMENT, `Name` varchar(45) DEFAULT NULL, `Country` varchar(90) DEFAULT NULL, PRIMARY KEY (`ID`), UNIQUE KEY `ID_UNIQUE` (`ID`) ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
+	msqli_query($db, "CREATE DATABASE Lab; USE Lab; CREATE TABLE `Lab` ( `ID` int(11) NOT NULL AUTO_INCREMENT, `Name` varchar(45) DEFAULT NULL, `Country` varchar(90) DEFAULT NULL, PRIMARY KEY (`ID`), UNIQUE KEY `ID_UNIQUE` (`ID`) ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
 
 	$name = "";
 	$country = "";
