@@ -1,15 +1,30 @@
 <?php 
 	session_start();
-    
-	if (isset($_POST['endpoint'])) $_SESSION['endpoint'] =  $_POST['endpoint'];
+
+	if (isset($_POST['endpoint'])) $_SESSION['endpoint'] =  $_POST['endpoint']; 
 	if (isset($_POST['master'])) $_SESSION['master'] =  $_POST['master'];
 	if (isset($_POST['password'])) $_SESSION['password'] =  $_POST['password'];
-	if (isset($_POST['database'])) $_SESSION['database'] =  $_POST['database'];
 
-	$db = mysqli_connect($_SESSION['endpoint'], $_SESSION['master'], $_SESSION['password'], $_SESSION['database']);
-	if (mysqli_connect_errno()) header('location: login.php');
+	$conn = mysqli_connect($_SESSION['endpoint'], $_SESSION['master'], $_SESSION['password']);
+	if (mysqli_connect_errno()) {
+		header('location: login.php');
+	}
+	else{
+	$sql = "CREATE DATABASE lab;";
+	mysqli_query($conn, $sql);
+	}
 
-	msqli_query($db, "CREATE DATABASE Lab; USE Lab; CREATE TABLE `Lab` ( `ID` int(11) NOT NULL AUTO_INCREMENT, `Name` varchar(45) DEFAULT NULL, `Country` varchar(90) DEFAULT NULL, PRIMARY KEY (`ID`), UNIQUE KEY `ID_UNIQUE` (`ID`) ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
+	$db = mysqli_connect($_SESSION['endpoint'], $_SESSION['master'], $_SESSION['password'], "lab");
+	
+	$table = "CREATE TABLE `Lab` (
+			   `ID` int(11) NOT NULL AUTO_INCREMENT,
+			   `Name` varchar(45) DEFAULT NULL,
+			   `Country` varchar(90) DEFAULT NULL,
+			   PRIMARY KEY (`ID`),
+			   UNIQUE KEY `ID_UNIQUE` (`ID`)
+			 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+	
+	mysqli_query($db, $table);
 
 	$name = "";
 	$country = "";

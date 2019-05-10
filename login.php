@@ -19,10 +19,6 @@
 			<label>Password</label>
 			<input type="password" name="password" value="" placeholder="lab-password">
         </div>
-        <div class="input-group">
-			<label>Database</label>
-			<input type="text" name="database" value="" placeholder="lab">
-		</div>
 		<div class="input-group">
             <button align="center" class="btn" type="submit" name="login" >Login</button>
             <button align="center" class="btn" type="reset" name="reset" >Reset</button>
